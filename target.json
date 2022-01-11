@@ -1,0 +1,17 @@
+
+{
+  "web": {
+    "baseUrl": "https://demo.opencart.com/"
+  },
+  "webadmin": {
+    "baseUrl": "http://localhost/opencart",
+    "username": "m1@ya.ru",
+    "password": "5555"
+  },
+  "db": {
+    "host": "localhost",
+    "name": "opencart",
+    "user": "root",
+    "password": ""
+  }
+}

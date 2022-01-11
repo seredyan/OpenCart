@@ -1,0 +1,29 @@
+[
+  {
+    "py/object": "model.users.User",
+    "id": null,
+    "firstname": "nmR",
+    "lastname": "mrs1j0",
+    "phone": "570",
+    "username": "116a@localhost.com",
+    "password": "test123"
+  },
+  {
+    "py/object": "model.users.User",
+    "id": null,
+    "firstname": "nmy",
+    "lastname": "mrs8",
+    "phone": "499",
+    "username": "150a@localhost.com",
+    "password": "test123"
+  },
+  {
+    "py/object": "model.users.User",
+    "id": null,
+    "firstname": "nm2",
+    "lastname": "mrsd",
+    "phone": "305",
+    "username": "i19a@localhost.com",
+    "password": "test123"
+  }
+]
