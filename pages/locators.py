@@ -25,8 +25,11 @@ class CategoryPageLocators:
 
 
 class ItemPageLocators:
-    ADD_TO_CART = (By.CSS_SELECTOR, "button[onclick^='cart.add']")
+
     MAC_DESKTOP = (By.PARTIAL_LINK_TEXT, 'Mac')
+    ADD_TO_CART_FROM_ITEM_PAGE = (By.CSS_SELECTOR, "#button-cart")
+    ITEM_PLATES = (By.CSS_SELECTOR, "div.product-thumb")
+    ITEM_PARTIAL_LINKS = (By.CSS_SELECTOR, "h4 a")
 
 
 
@@ -34,7 +37,7 @@ class LoginPageLocators:
     pass
 
 class MainPageLocators:
-    pass
+    ADD_TO_CART_FROM_OPTIONS = (By.CSS_SELECTOR, "button[onclick^='cart.add']")
 
 
 
