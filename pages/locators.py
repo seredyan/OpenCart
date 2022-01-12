@@ -13,8 +13,15 @@ class CartPageLocators:
     CART_CHECKOUT = (By.CSS_SELECTOR, "a.btn-primary")  ## ?????
 
 
+class CategoryPageLocators:
+    DESKTOPS = (By.LINK_TEXT, "Desktops")
+    LAPTOPS = (By.PARTIAL_LINK_TEXT, "Laptops")
+    TABLETS = (By.LINK_TEXT, "Tablets")
+
 class ItemPageLocators:
-    pass
+    ADD_TO_CART = (By.CSS_SELECTOR, "button[onclick^='cart.add']")
+    MAC = (By.PARTIAL_LINK_TEXT, 'Mac')
+    ALL_LAPTOPS = (By.PARTIAL_LINK_TEXT, 'Show All Laptops')
 
 class LoginPageLocators:
     pass

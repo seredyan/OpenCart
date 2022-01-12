@@ -7,7 +7,7 @@ import json
 import os.path
 import importlib
 from selenium.webdriver.chrome.options import Options
-# import pymysql.cursors
+import pymysql.cursors
 
 target = None
 
