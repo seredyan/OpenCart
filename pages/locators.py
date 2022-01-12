@@ -16,12 +16,19 @@ class CartPageLocators:
 class CategoryPageLocators:
     DESKTOPS = (By.LINK_TEXT, "Desktops")
     LAPTOPS = (By.PARTIAL_LINK_TEXT, "Laptops")
+    SHOW_ALL_IN_CATEGORIES = (By.PARTIAL_LINK_TEXT, 'Show All')
     TABLETS = (By.LINK_TEXT, "Tablets")
+    COMPONENTS = (By.LINK_TEXT, "Components")
+    PHONES = (By.PARTIAL_LINK_TEXT, "Phones")
+    CAMERAS = (By.LINK_TEXT, "Cameras")
+    MP3_PLAYERS = (By.PARTIAL_LINK_TEXT, "MP3")
+
 
 class ItemPageLocators:
     ADD_TO_CART = (By.CSS_SELECTOR, "button[onclick^='cart.add']")
-    MAC = (By.PARTIAL_LINK_TEXT, 'Mac')
-    ALL_LAPTOPS = (By.PARTIAL_LINK_TEXT, 'Show All Laptops')
+    MAC_DESKTOP = (By.PARTIAL_LINK_TEXT, 'Mac')
+
+
 
 class LoginPageLocators:
     pass

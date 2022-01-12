@@ -9,4 +9,4 @@ class CategoryPage(BasePage):
 
     def open_laptop_page(self):
         self.browser.find_element(*CategoryPageLocators.LAPTOPS).click()
-        self.browser.find_element(*ItemPageLocators.ALL_LAPTOPS).click()
+        self.browser.find_element(*CategoryPageLocators.SHOW_ALL_IN_CATEGORIES).click()
