@@ -13,6 +13,7 @@ class CartPageLocators:
     CART_CHECKOUT = (By.CSS_SELECTOR, "a.btn-primary")  ## ?????
 
 
+
 class CategoryPageLocators:
     DESKTOPS = (By.LINK_TEXT, "Desktops")
     LAPTOPS = (By.PARTIAL_LINK_TEXT, "Laptops")
@@ -26,10 +27,12 @@ class CategoryPageLocators:
 
 class ItemPageLocators:
 
-    MAC_DESKTOP = (By.PARTIAL_LINK_TEXT, 'Mac')
     ADD_TO_CART_FROM_ITEM_PAGE = (By.CSS_SELECTOR, "#button-cart")
-    ITEM_PLATES = (By.CSS_SELECTOR, "div.product-thumb")
     APPENDED_PART_TO_ITEM_PAGE = (By.CSS_SELECTOR, "h4 a")
+    ITEM_PLATES = (By.CSS_SELECTOR, "div.product-thumb")
+    ITEM_NAME_ON_ITEM_PAGE = (By.CSS_SELECTOR, "#content div.col-sm-4 h1")
+    MAC_DESKTOP = (By.PARTIAL_LINK_TEXT, 'Mac')
+    SUCCESS_ADD_ITEM_MESSAGE = (By.CSS_SELECTOR, "div.alert-success")
 
 
 
