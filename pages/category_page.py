@@ -17,9 +17,6 @@ class CategoryPage(BasePage):
 
 
 
-
-
-
     """auxiliary methods """
 
     def open_all_in_categories(self):

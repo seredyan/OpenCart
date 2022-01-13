@@ -8,20 +8,21 @@ from .locators import ItemPageLocators, MainPageLocators
 
 class ItemPage(BasePage):
 
-    def add_to_cart(self, item_id=None):
+    def add_to_cart(self, item_id=None):  ## there is designed to use 2 different locators for add_to_cart button
         if not item_id == None:
             item = self.select_item(item_id)
-            item.find_element(*MainPageLocators.ADD_TO_CART_FROM_OPTIONS).click()
+            item.find_element(*MainPageLocators.ADD_TO_CART_FROM_OPTIONS).click() ## add to cart item from item's group
         else:
-            self.browser.find_element(*ItemPageLocators.ADD_TO_CART_FROM_ITEM_PAGE).click()
+            self.browser.find_element(*ItemPageLocators.ADD_TO_CART_FROM_ITEM_PAGE).click() ## add to cart item from single item's page
+        time.sleep(2.5)
 
 
 
     """auxiliary methods """
 
 
-    def select_item(self, item_id):
-        items = self.browser.find_elements(*ItemPageLocators.ITEM_PLATES)
+    def select_item(self, item_id):  # item_id must be assigned by testers
+        items = self.browser.find_elements(*ItemPageLocators.ITEM_PLATES)  # find of group of item's plates
         for item in items:
             if int((item.find_element(*ItemPageLocators.APPENDED_PART_TO_ITEM_PAGE).get_attribute('href')).split("id=", 1)[1]) == item_id:
                 selected_item = item
@@ -34,5 +35,7 @@ class ItemPage(BasePage):
         self.browser.find_element(*ItemPageLocators.MAC_DESKTOP).click()
 
 
-    def open_item_info_page(self):
-        pass
+    def open_item_info_page(self, item_id):
+        item = self.select_item(item_id)
+        item.find_element(*ItemPageLocators.APPENDED_PART_TO_ITEM_PAGE).click()
+        time.sleep(2.5)
