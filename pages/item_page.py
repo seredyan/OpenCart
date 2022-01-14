@@ -41,10 +41,9 @@ class ItemPage(BasePage):
         time.sleep(2.5)
 
     def success_added_to_cart_message_present(self, item_id=None):
-        # message = self.is_element_present(*ItemPageLocators.SUCCESS_ADD_TO_CART_MESSAGE), "Add_to Cart Success Message is not present"
-        self.is_element_present(*ItemPageLocators.SUCCESS_ADD_ITEM_MESSAGE)
+        message = self.browser.find_element(*ItemPageLocators.SUCCESS_ADD_ITEM_MESSAGE).text
         product_name = self.get_item_name(item_id)
-        assert f"Success: You have added {product_name} to your shopping cart!"
+        return "Success" and product_name and "shopping cart" in message
 
 
     def get_item_name(self, item_id=None):
