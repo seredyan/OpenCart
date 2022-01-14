@@ -33,6 +33,9 @@ class ItemPageLocators:
     ITEM_NAME_ON_ITEM_PAGE = (By.CSS_SELECTOR, "#content div.col-sm-4 h1")
     MAC_DESKTOP = (By.PARTIAL_LINK_TEXT, 'Mac')
     SUCCESS_ADD_ITEM_MESSAGE = (By.CSS_SELECTOR, "div.alert-success")
+    ITEM_PRICE_ON_ITEM_PAGE = (By.CSS_SELECTOR, "#content div.col-sm-4 h2")
+    INPUT_QUANTITY = (By.CSS_SELECTOR, "#input-quantity")
+
 
 
 
@@ -41,6 +44,7 @@ class LoginPageLocators:
 
 class MainPageLocators:
     ADD_TO_CART_FROM_OPTIONS = (By.CSS_SELECTOR, "button[onclick^='cart.add']")
+    BUTTON_CART_TOTAL = (By.CSS_SELECTOR, "#cart-total")
 
 
 

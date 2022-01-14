@@ -21,6 +21,14 @@ class BasePage:
 
 
 
+    def change_field_value(self, selector, field_name, text):
+        if text is not None:
+            self.browser.find_element(selector, field_name).click()
+            self.browser.find_element(selector, field_name).clear()
+            self.browser.find_element(selector, field_name).send_keys(text)
+
+
+
     def go_to_basket(self):
         self.browser.find_element(*BasePageLocators.DISPLAYED_BASKET).click()
 

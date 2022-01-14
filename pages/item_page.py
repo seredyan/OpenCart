@@ -1,8 +1,9 @@
 import random
 import time
-
+import re
 from pages.base_page import BasePage
 from .locators import ItemPageLocators, MainPageLocators
+from model.cart import Cart
 
 
 
@@ -52,6 +53,18 @@ class ItemPage(BasePage):
             return item.find_element(*ItemPageLocators.APPENDED_PART_TO_ITEM_PAGE).text
         else:
             return self.browser.find_element(*ItemPageLocators.ITEM_NAME_ON_ITEM_PAGE).text
+
+
+
+    def get_item_price(self, qty):
+        info_price = self.browser.find_element(*ItemPageLocators.ITEM_PRICE_ON_ITEM_PAGE).text
+        all_numbers = "\d+\,*?\d+"
+        all_amount = re.findall(all_numbers, info_price)
+        total = int(all_amount[0].replace(',', ''))
+        return Cart(qty=qty, price=total)
+
+    def input_quantity(self, qty):
+        return self.change_field_value(*ItemPageLocators.INPUT_QUANTITY, qty)
 
 
 
