@@ -58,15 +58,31 @@ class ItemPage(BasePage):
 
     def get_item_price(self, qty):
         info_price = self.browser.find_element(*ItemPageLocators.ITEM_PRICE_ON_ITEM_PAGE).text
-        all_numbers = "\d+\,*?\d+"
-        all_amount = re.findall(all_numbers, info_price)
-        total = int(all_amount[0].replace(',', ''))
+        total = self.manage_text(info_price)
         return Cart(qty=qty, price=total)
+
 
     def input_quantity(self, qty):
         return self.change_field_value(*ItemPageLocators.INPUT_QUANTITY, qty)
 
 
+    def get_info_price_from_plate(self, item_id=None):
+
+        info_price = self.read_info_price_from_plate(item_id)
+        total = self.manage_text(info_price)
+        return total
+
+    def manage_text(self, info_price):
+        """produces a clean digit of total from the received text """
+        all_numbers = "\d+\,*?\d+"
+        all_amount = re.findall(all_numbers, info_price)
+        total = int(all_amount[0].replace(',', ''))
+        return total
+
+    def read_info_price_from_plate(self, item_id=None):
+        """reads info about price from the item's plate on the category_page"""
+        item = self.select_item(item_id)
+        return item.find_element(*ItemPageLocators.APPENDED_PART_ITEM_PRICE).text
 
 
 

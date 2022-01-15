@@ -29,6 +29,7 @@ class ItemPageLocators:
 
     ADD_TO_CART_FROM_ITEM_PAGE = (By.CSS_SELECTOR, "#button-cart")
     APPENDED_PART_TO_ITEM_PAGE = (By.CSS_SELECTOR, "h4 a")
+    APPENDED_PART_ITEM_PRICE = (By.CSS_SELECTOR, ".price")
     ITEM_PLATES = (By.CSS_SELECTOR, "div.product-thumb")
     ITEM_NAME_ON_ITEM_PAGE = (By.CSS_SELECTOR, "#content div.col-sm-4 h1")
     MAC_DESKTOP = (By.PARTIAL_LINK_TEXT, 'Mac')
