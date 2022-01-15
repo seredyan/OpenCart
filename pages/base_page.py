@@ -2,7 +2,7 @@
 import time
 
 from selenium.common.exceptions import NoSuchElementException, TimeoutException, NoAlertPresentException
-import math
+import re
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from pages.locators import BasePageLocators
@@ -35,10 +35,6 @@ class BasePage:
     def go_to_login_page(self):
         self.browser.find_element(*BasePageLocators.LOGIN_LINK).click()
 
-    def open(self, url):
-        wd = self.browser
-        wd.get(url)
-
 
     def is_element_present(self, how, what):
         try:
@@ -69,6 +65,17 @@ class BasePage:
         return True
 
 
+    def manage_text(self, info_price):
+        """produces a clean digit of total from the received text """
+        all_numbers = "\d+\,*?\d+"
+        all_amount = re.findall(all_numbers, info_price)
+        total = int(all_amount[0].replace(',', ''))
+        return total
+
+    def open(self, url):
+        wd = self.browser
+        wd.get(url)
+
 
     def should_be_login_link(self):
         assert self.is_element_present(*BasePageLocators.LOGIN_LINK), "Login link is not present"
@@ -77,7 +84,7 @@ class BasePage:
 
 
     def should_be_authorized_user(self):
-        assert self.is_element_present(*BasePageLocators.USER_ICON), "User icon is not presented," \
+        assert self.is_element_present(*BasePageLocators.USER_ICON), "User icon is not present," \
                                                                      " probably unauthorised user"
 
     # def is_valid(self):

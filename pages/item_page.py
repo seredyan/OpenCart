@@ -72,13 +72,6 @@ class ItemPage(BasePage):
         total = self.manage_text(info_price)
         return total
 
-    def manage_text(self, info_price):
-        """produces a clean digit of total from the received text """
-        all_numbers = "\d+\,*?\d+"
-        all_amount = re.findall(all_numbers, info_price)
-        total = int(all_amount[0].replace(',', ''))
-        return total
-
     def read_info_price_from_plate(self, item_id=None):
         """reads info about price from the item's plate on the category_page"""
         item = self.select_item(item_id)

@@ -20,10 +20,6 @@ class MainPage(BasePage):
 
 
     def process_info_from_cart(self, text):  # get text from cart
-
-        all_numbers = "\d+\,*?\d+"
         item = int(re.search("\d+", text).group())
-        all_amount = re.findall(all_numbers, text)
-        total = int(all_amount[0].replace(',', ''))
-
+        total = self.manage_text(text)
         return Cart(qty=item, price=total)
