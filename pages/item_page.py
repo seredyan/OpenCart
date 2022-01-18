@@ -15,7 +15,7 @@ class ItemPage(BasePage):
             item.find_element(*MainPageLocators.ADD_TO_CART_FROM_OPTIONS).click() ## add to cart item from item's group
         else:
             self.browser.find_element(*ItemPageLocators.ADD_TO_CART_FROM_ITEM_PAGE).click() ## add to cart item from single item's page
-        time.sleep(2.5)
+        time.sleep(0.5)  # it's needed because of cart_total takes time to be changed
 
 
 
@@ -40,7 +40,7 @@ class ItemPage(BasePage):
     def open_item_info_page(self, item_id):
         item = self.select_item(item_id)
         item.find_element(*ItemPageLocators.APPENDED_PART_TO_ITEM_PAGE).click()
-        time.sleep(2.5)
+        time.sleep(1)
 
 
     def success_added_to_cart_message_present(self, item_id=None):
