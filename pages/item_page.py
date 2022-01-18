@@ -36,10 +36,12 @@ class ItemPage(BasePage):
         self.browser.find_element(*ItemPageLocators.MAC_DESKTOP).click()
 
 
+
     def open_item_info_page(self, item_id):
         item = self.select_item(item_id)
         item.find_element(*ItemPageLocators.APPENDED_PART_TO_ITEM_PAGE).click()
         time.sleep(2.5)
+
 
     def success_added_to_cart_message_present(self, item_id=None):
         message = self.browser.find_element(*ItemPageLocators.SUCCESS_ADD_ITEM_MESSAGE).text
@@ -56,24 +58,31 @@ class ItemPage(BasePage):
 
 
 
-    def get_item_price(self, qty):
-        info_price = self.browser.find_element(*ItemPageLocators.ITEM_PRICE_ON_ITEM_PAGE).text
-        total = self.manage_text(info_price)
+    def get_item_price_and_quantity(self, item_id=None, qty=1):
+        """get_item_price_and_quantity added to cart"""
+        if "category" in self.browser.current_url or self.browser.current_url.endswith("/home"):
+            total = self.get_item_price_from_plate(item_id)
+        else:
+            info_price = self.browser.find_element(*ItemPageLocators.ITEM_PRICE_ON_ITEM_PAGE).text
+            total = self.manage_text(info_price)
         return Cart(qty=qty, price=total)
 
 
+
+
     def input_quantity(self, qty):
+        """input_quantity by adding to cart"""
         return self.change_field_value(*ItemPageLocators.INPUT_QUANTITY, qty)
 
 
-    def get_info_price_from_plate(self, item_id=None):
-
-        info_price = self.read_info_price_from_plate(item_id)
+    def get_item_price_from_plate(self, item_id=None):
+        """provides clear price"""
+        info_price = self.ccollect_all_info_price_from_plate(item_id)
         total = self.manage_text(info_price)
         return total
 
-    def read_info_price_from_plate(self, item_id=None):
-        """reads info about price from the item's plate on the category_page"""
+    def ccollect_all_info_price_from_plate(self, item_id=None):
+        """reads info about full price (include Tax) from the item's plate on the category_page"""
         item = self.select_item(item_id)
         return item.find_element(*ItemPageLocators.APPENDED_PART_ITEM_PRICE).text
 
