@@ -58,16 +58,12 @@ class ItemPage(BasePage):
 
 
 
-    def get_item_price_and_quantity(self, item_id=None, qty=1):
-        """get_item_price_and_quantity added to cart"""
-        if "category" in self.browser.current_url or self.browser.current_url.endswith("/home"):
-            total = self.get_item_price_from_plate(item_id)
-        else:
-            info_price = self.browser.find_element(*ItemPageLocators.ITEM_PRICE_ON_ITEM_PAGE).text
-            total = self.manage_text(info_price)
-        return Cart(qty=qty, price=total)
 
 
+    def get_total_item_price_and_quantity(self, qty):
+        info_price = self.browser.find_element(*ItemPageLocators.ITEM_PRICE_ON_ITEM_PAGE).text
+        total = self.manage_text(info_price)
+        return Cart(qty=qty, price=total*qty)
 
 
     def input_quantity(self, qty):
