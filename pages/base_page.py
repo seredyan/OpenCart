@@ -65,12 +65,12 @@ class BasePage:
         return True
 
 
-    def manage_text(self, info_price):
+    def manage_price_text(self, info_price):
         """produces a clean digit of total from the received text """
-        all_numbers = "\d+\,*?\d+"
-        all_amount = re.findall(all_numbers, info_price)
-        total = int(all_amount[0].replace(',', ''))
+        price = info_price.split("$", 1)[1]
+        total = float(price.replace(',', ''))
         return total
+
 
     def open(self, url):
         wd = self.browser

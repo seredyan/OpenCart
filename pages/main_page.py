@@ -18,6 +18,6 @@ class MainPage(BasePage):
 
 
     def process_info_from_cart(self, text):  # get text from cart
-        item = int(re.search("\d+", text).group())
-        total = self.manage_text(text)
-        return Cart(qty=item, price=total)
+        item_qty = int(text.split("item(s)", 1)[0])
+        total = self.manage_price_text(text)
+        return Cart(qty=item_qty, price=total)

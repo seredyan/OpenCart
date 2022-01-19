@@ -1,7 +1,7 @@
 
 {
   "web": {
-    "baseUrl": "https://demo.opencart.com/"
+    "baseUrl": "http://localhost/opencart"
   },
   "webadmin": {
     "baseUrl": "http://localhost/opencart",

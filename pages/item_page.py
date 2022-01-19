@@ -59,10 +59,9 @@ class ItemPage(BasePage):
 
 
 
-
-    def get_total_item_price_and_quantity(self, qty):
+    def get_total_item_price_and_quantity_from_item_page(self, qty):
         info_price = self.browser.find_element(*ItemPageLocators.ITEM_PRICE_ON_ITEM_PAGE).text
-        total = self.manage_text(info_price)
+        total = self.manage_price_text(info_price)
         return Cart(qty=qty, price=total*qty)
 
 
@@ -74,8 +73,10 @@ class ItemPage(BasePage):
     def get_item_price_from_plate(self, item_id=None):
         """provides clear price"""
         info_price = self.ccollect_all_info_price_from_plate(item_id)
-        total = self.manage_text(info_price)
+        get_total = re.search("\d+\,*?\d+\.*?\d+", info_price).group(0)
+        total = float(get_total.replace(',', ''))
         return total
+
 
     def ccollect_all_info_price_from_plate(self, item_id=None):
         """reads info about full price (include Tax) from the item's plate on the category_page"""

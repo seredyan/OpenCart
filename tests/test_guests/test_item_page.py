@@ -76,13 +76,13 @@ def test_check_cart_total_adding_item_to_cart_from_its_page(category_page, brows
 
     cart = MainPage(browser, config)
     old_cart_total = cart.get_cart_total_from_cart_button()
-    quantity = random.randrange(3, 6)
+    quantity = random.randrange(10, 15)
     page.input_quantity(quantity)
     page.add_to_cart()
 
     new_cart_total = cart.get_cart_total_from_cart_button()
 
-    items_total = page.get_total_item_price_and_quantity(quantity)
+    items_total = page.get_total_item_price_and_quantity_from_item_page(quantity)
     old_cart_total.qty = old_cart_total.qty + items_total.qty
     old_cart_total.price = old_cart_total.price + items_total.price
 
@@ -91,8 +91,9 @@ def test_check_cart_total_adding_item_to_cart_from_its_page(category_page, brows
 
 
 
-def test_check_all_asserts_adding_item_to_cart(category_page, browser, config, item=random.randrange(43, 47)):
-    """by using pytest-check is able to use asserts as much as needed"""
+@pytest.mark.parametrize('item', [num for num in range(43, 47)])
+def test_check_all_asserts_adding_item_to_cart(category_page, browser, config, item):
+    """by using pytest-check is able to use asserts as much as needed in a same test"""
     category_page.open_laptops_page()
     page = ItemPage(browser, category_page.config)
     page.open_item_info_page(item)
@@ -105,7 +106,7 @@ def test_check_all_asserts_adding_item_to_cart(category_page, browser, config, i
 
     new_cart_total = cart.get_cart_total_from_cart_button()
 
-    items_total = page.get_total_item_price_and_quantity(quantity)
+    items_total = page.get_total_item_price_and_quantity_from_item_page(quantity)
     old_cart_total.qty = old_cart_total.qty + items_total.qty
     old_cart_total.price = old_cart_total.price + items_total.price
 
