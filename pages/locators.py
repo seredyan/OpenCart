@@ -41,7 +41,22 @@ class ItemPageLocators:
 
 
 class LoginPageLocators:
-    pass
+    CHECK_BOX_PRIVACY_POLICY_AGREE = (By.NAME, "agree")
+    CONTINUE_TO_REGISTER = (By.CSS_SELECTOR, "input[value='Continue']")
+    CONTINUE_TO_FINISH_REGISTRATION = (By.CSS_SELECTOR, ".buttons .btn-primary")
+    GO_TO_REGISTER = (By.LINK_TEXT, "Register")
+    GO_TO_LOGIN = (By.LINK_TEXT, "Login")
+    LOGIN = (By.CSS_SELECTOR, "input[value='Login']")
+    LOGOUT = (By.LINK_TEXT, "Logout")
+    MY_ACCOUNT = (By.CSS_SELECTOR, ".list-inline .dropdown a.dropdown-toggle")
+    REGISTER_FIRST_NAME = (By.CSS_SELECTOR, "#input-firstname")
+    REGISTER_LAST_NAME = (By.CSS_SELECTOR, "#input-lastname")
+    REGISTER_EMAIL = (By.CSS_SELECTOR, "#input-email")
+    REGISTER_PHONE = (By.CSS_SELECTOR, "#input-telephone")
+    REGISTER_PASSWORD = (By.CSS_SELECTOR, "#input-password")
+    REGISTER_CONFIRM_PASSWORD = (By.CSS_SELECTOR, "#input-confirm")
+
+
 
 class MainPageLocators:
     ADD_TO_CART_FROM_OPTIONS = (By.CSS_SELECTOR, "button[onclick^='cart.add']")
