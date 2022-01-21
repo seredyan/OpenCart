@@ -26,12 +26,11 @@ class LoginPage(BasePage):
 
 
 
-    def edit_account(self, user, edited_user):
-        self.login(user)
+    def edit_account(self, user, edited_user, password):
+        self.login(user, password)
         self.browser.find_element(*LoginPageLocators.EDIT_ACCOUNT).click()
         self.fill_sign_up_forms(edited_user)
         self.browser.find_element(*LoginPageLocators.CONTINUE_TO_REGISTER).click()
-
         # self.logout()
 
 
@@ -42,10 +41,10 @@ class LoginPage(BasePage):
 
 
 
-    def can_login(self, user):
+    def can_login(self, username, password):
         self.ensure_logout()
         self.browser.implicitly_wait(0.5)
-        self.login(user)
+        self.login(username, password)
         return self.is_logged_in()
 
 
@@ -96,10 +95,10 @@ class LoginPage(BasePage):
         self.change_field_value(*LoginPageLocators.REGISTER_CONFIRM_PASSWORD, user.password)
 
 
-    def login(self, user):
+    def login(self, username, password):
         self.go_to_login()
-        self.change_field_value(*LoginPageLocators.REGISTER_EMAIL, user.username)
-        self.change_field_value(*LoginPageLocators.REGISTER_PASSWORD, user.password)
+        self.change_field_value(*LoginPageLocators.REGISTER_EMAIL, username)
+        self.change_field_value(*LoginPageLocators.REGISTER_PASSWORD, password)
         self.browser.find_element(*LoginPageLocators.LOGIN).click()
 
     def logout(self):

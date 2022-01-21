@@ -55,7 +55,8 @@ class LoginPageLocators:
     REGISTER_PHONE = (By.CSS_SELECTOR, "#input-telephone")
     REGISTER_PASSWORD = (By.CSS_SELECTOR, "#input-password")
     REGISTER_CONFIRM_PASSWORD = (By.CSS_SELECTOR, "#input-confirm")
-    EDIT_ACCOUNT = (By.CSS_SELECTOR, "a.list-group-item:nth-child(2)")
+    # EDIT_ACCOUNT = (By.CSS_SELECTOR, "a.list-group-item:nth-child(2)")
+    EDIT_ACCOUNT = (By.LINK_TEXT, "Edit Account")
 
 
 class MainPageLocators:
