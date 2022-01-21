@@ -2,7 +2,7 @@ import random
 import time
 import re
 from pages.base_page import BasePage
-from .locators import ItemPageLocators, MainPageLocators
+from .locators import ItemPageLocators, MainPageLocators, BasePageLocators
 from model.cart import Cart
 
 
@@ -43,8 +43,8 @@ class ItemPage(BasePage):
         time.sleep(1)
 
 
-    def success_added_to_cart_message_present(self, item_id=None):
-        message = self.browser.find_element(*ItemPageLocators.SUCCESS_ADD_ITEM_MESSAGE).text
+    def should_be_success_added_to_cart_message(self, item_id=None):
+        message = self.browser.find_element(*BasePageLocators.SUCCESS_MESSAGE).text
         product_name = self.get_item_name(item_id)
         return "Success" and product_name and "shopping cart" in message
 

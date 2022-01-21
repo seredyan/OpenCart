@@ -6,6 +6,7 @@ class BasePageLocators:
     LOGIN_LINK = (By.CSS_SELECTOR, " .dropdown .caret")
     LOGIN_LINK_INVALID = (By.CSS_SELECTOR, " .dropdown .caret_inv")  ## for test NoSuchElementException
     DISPLAYED_BASKET = (By.ID, "cart-total")
+    SUCCESS_MESSAGE = (By.CSS_SELECTOR, "div.alert-success")
 
 
 class CartPageLocators:
@@ -33,7 +34,6 @@ class ItemPageLocators:
     ITEM_PLATES = (By.CSS_SELECTOR, "div.product-thumb")
     ITEM_NAME_ON_ITEM_PAGE = (By.CSS_SELECTOR, "#content div.col-sm-4 h1")
     MAC_DESKTOP = (By.PARTIAL_LINK_TEXT, 'Mac')
-    SUCCESS_ADD_ITEM_MESSAGE = (By.CSS_SELECTOR, "div.alert-success")
     ITEM_PRICE_ON_ITEM_PAGE = (By.CSS_SELECTOR, "#content div.col-sm-4 h2")
     INPUT_QUANTITY = (By.CSS_SELECTOR, "#input-quantity")
 
@@ -55,7 +55,7 @@ class LoginPageLocators:
     REGISTER_PHONE = (By.CSS_SELECTOR, "#input-telephone")
     REGISTER_PASSWORD = (By.CSS_SELECTOR, "#input-password")
     REGISTER_CONFIRM_PASSWORD = (By.CSS_SELECTOR, "#input-confirm")
-
+    EDIT_ACCOUNT = (By.CSS_SELECTOR, "a.list-group-item:nth-child(2)")
 
 
 class MainPageLocators:

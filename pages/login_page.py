@@ -1,7 +1,7 @@
 import time
 
 from .base_page import BasePage
-from .locators import LoginPageLocators
+from .locators import LoginPageLocators, BasePageLocators
 from model.users import User
 
 class LoginPage(BasePage):
@@ -16,7 +16,6 @@ class LoginPage(BasePage):
         self.browser.find_element(*LoginPageLocators.CHECK_BOX_PRIVACY_POLICY_AGREE).click()
         self.browser.find_element(*LoginPageLocators.CONTINUE_TO_REGISTER).click()
         self.browser.find_element(*LoginPageLocators.CONTINUE_TO_FINISH_REGISTRATION).click()
-        # ???? next steps test new_users get logout  ????
 
 
 
@@ -26,9 +25,15 @@ class LoginPage(BasePage):
 
 
 
-    def edit_account(self, user, edited_user, password):
+
+    def edit_account(self, user, edited_user):
         self.login(user)
-        pass
+        self.browser.find_element(*LoginPageLocators.EDIT_ACCOUNT).click()
+        self.fill_sign_up_forms(edited_user)
+        self.browser.find_element(*LoginPageLocators.CONTINUE_TO_REGISTER).click()
+
+        # self.logout()
+
 
 
 
@@ -41,7 +46,6 @@ class LoginPage(BasePage):
         self.ensure_logout()
         self.browser.implicitly_wait(0.5)
         self.login(user)
-        self.browser.find_element(*LoginPageLocators.LOGIN).click()
         return self.is_logged_in()
 
 
@@ -62,7 +66,7 @@ class LoginPage(BasePage):
 
 
     def go_to_account(self):
-        self.browser.implicitly_wait(0.5)
+        self.browser.implicitly_wait(0.2)
         if self.is_element_present(*LoginPageLocators.GO_TO_LOGIN) or self.is_element_present(*LoginPageLocators.LOGOUT):
             self.browser.find_element(*LoginPageLocators.MY_ACCOUNT).click()
         self.browser.find_element(*LoginPageLocators.MY_ACCOUNT).click()
@@ -79,15 +83,11 @@ class LoginPage(BasePage):
 
     def is_logged_in(self):
         self.go_to_account()
-        self.browser.implicitly_wait(0.5)
+        self.browser.implicitly_wait(0.2)
         return len(self.browser.find_elements(*LoginPageLocators.LOGOUT)) > 0
 
 
-
-
-
     def fill_sign_up_forms(self, user):
-
         self.change_field_value(*LoginPageLocators.REGISTER_FIRST_NAME, user.firstname)
         self.change_field_value(*LoginPageLocators.REGISTER_LAST_NAME, user.lastname)
         self.change_field_value(*LoginPageLocators.REGISTER_EMAIL, user.username)
@@ -100,15 +100,14 @@ class LoginPage(BasePage):
         self.go_to_login()
         self.change_field_value(*LoginPageLocators.REGISTER_EMAIL, user.username)
         self.change_field_value(*LoginPageLocators.REGISTER_PASSWORD, user.password)
-        self.browser.find_element(*LoginPageLocators.LOGIN)
-
-
-
-
+        self.browser.find_element(*LoginPageLocators.LOGIN).click()
 
     def logout(self):
         self.go_to_account()
         self.browser.find_element(*LoginPageLocators.LOGOUT).click()
+
+    def should_be_success_message(self):
+        return self.is_element_present(*BasePageLocators.SUCCESS_MESSAGE)
 
 
 
