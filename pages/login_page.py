@@ -25,7 +25,7 @@ class LoginPage(BasePage):
         self.browser.find_element(*LoginPageLocators.EDIT_ACCOUNT).click()
         self.fill_sign_up_forms(edited_user)
         self.browser.find_element(*LoginPageLocators.CONTINUE_TO_REGISTER).click()
-        # self.logout()
+        self.logout()
 
 
 
