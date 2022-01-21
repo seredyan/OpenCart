@@ -20,12 +20,6 @@ class LoginPage(BasePage):
 
 
 
-
-
-
-
-
-
     def edit_account(self, user, edited_user, password):
         self.login(user, password)
         self.browser.find_element(*LoginPageLocators.EDIT_ACCOUNT).click()
