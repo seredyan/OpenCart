@@ -2,46 +2,10 @@
   {
     "py/object": "model.users.User",
     "id": null,
-    "firstname": "nmI6",
-    "lastname": "mrsj34",
-    "phone": "121",
-    "username": "92a@localhost.com",
-    "password": "test123"
-  },
-  {
-    "py/object": "model.users.User",
-    "id": null,
-    "firstname": "nmP",
-    "lastname": "mrs",
-    "phone": "321",
-    "username": "150a@localhost.com",
-    "password": "test123"
-  },
-  {
-    "py/object": "model.users.User",
-    "id": null,
     "firstname": "nm",
-    "lastname": "mrsd9D",
-    "phone": "190",
-    "username": "59f110a@localhost.com",
-    "password": "test123"
-  },
-  {
-    "py/object": "model.users.User",
-    "id": null,
-    "firstname": "nms",
-    "lastname": "mrsp93",
-    "phone": "157",
-    "username": "u103a@localhost.com",
-    "password": "test123"
-  },
-  {
-    "py/object": "model.users.User",
-    "id": null,
-    "firstname": "nmuS",
-    "lastname": "mrsp35",
-    "phone": "793",
-    "username": "20a@localhost.com",
+    "lastname": "mrs",
+    "phone": "648",
+    "username": "BFr37a@localhost.com",
     "password": "test123"
   }
 ]
