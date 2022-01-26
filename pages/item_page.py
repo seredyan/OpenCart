@@ -17,9 +17,37 @@ class ItemPage(BasePage):
             self.browser.find_element(*ItemPageLocators.ADD_TO_CART_FROM_ITEM_PAGE).click() ## add to cart item from single item's page
         time.sleep(2)  # it's needed because of cart_total takes time to be changed
 
+        return int(item_id)
+
 
 
     """auxiliary methods """
+
+
+
+
+    def get_qty(self, used_cart, old_cart, new_cart):  ##!!!needs to be fixed!!!!!!!
+
+        user = None
+
+        for i in old_cart:
+            if used_cart == i:  # item added into exist user's cart
+                user = i
+                user.qty += 1
+
+            else:  # item added into not exist user's cart
+                continue
+
+        if user is None:
+            old_cart.append(used_cart)  # added new user into old list
+            return [used_cart.qty, new_cart[-1].qty]
+        else:
+            for x in new_cart:
+                if used_cart == x:
+                    user2 = x
+                    return [user.qty, user2.qty]
+
+
 
 
     def select_item(self, item_id):  # item_id must be assigned by testers

@@ -5,6 +5,7 @@ from pages.category_page import CategoryPage
 from pages.item_page import ItemPage
 import generator.users
 from model.users import User
+from model.cart import Cart
 import random
 
 
@@ -45,6 +46,22 @@ def test_random_user_can_add_to_cart_random_item_from_opened_single_item_page(db
 
 
 
+def test_check_cart_after_user_added_to_cart_some_item(db, category_page, browser, config, item=45):
+    check_available_parameters(category_page, db)
+    user = login_random_user(db, browser, config)
+    old_cart = db.get_items_in_cart_list()
+    category_page.open_laptops_page()
+    page = ItemPage(browser, category_page.config)
+    product_id = page.add_to_cart(item)
+    new_cart = db.get_items_in_cart_list()
+    used_cart = Cart(customer=int(user.id), product=product_id, qty=1)
+    quantity = page.get_qty(used_cart, old_cart, new_cart)
+
+    assert old_cart == new_cart
+    assert quantity[0] == quantity[1]
+
+
+
 
 
 
@@ -64,6 +81,7 @@ def login_random_user(db, browser, config):
         old_users = db.get_users_list()
         selected_user = random.choice(old_users)
         page.login(selected_user.username, "test123")
+        return selected_user
     return
 
 
