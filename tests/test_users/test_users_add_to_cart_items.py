@@ -17,10 +17,11 @@ def category_page(browser, config):
 
 
 
-@pytest.mark.parametrize('item', [num for num in range(43, 44)])
+@pytest.mark.parametrize('item', [num for num in range(43, 47)])
 def test_random_user_can_add_to_cart_random_item_from_category_page(db, category_page, browser, config, item):
     login_page = LoginPage(browser, config)
     login_page.check_available_users(db)
+
     selected_user = random.choice(db.get_users_list())
     login_page.login(selected_user.username, "test123")
     category_page.open_laptops_page()
@@ -31,11 +32,11 @@ def test_random_user_can_add_to_cart_random_item_from_category_page(db, category
 
 
 
-@pytest.mark.parametrize('item', [num for num in range(43, 44)])
+@pytest.mark.parametrize('item', [num for num in range(43, 48)])
 def test_random_user_can_add_to_cart_random_item_from_opened_single_item_page(db, category_page, browser, config, item):
     login_page = LoginPage(browser, config)
     login_page.check_available_users(db)
-    login_page.ensure_logout()
+
     selected_user = random.choice(db.get_users_list())
     login_page.login(selected_user.username, "test123")
     category_page.open_laptops_page()
@@ -51,7 +52,6 @@ def test_random_user_can_add_to_cart_random_item_from_opened_single_item_page(db
 def test_check_cart_after_user_added_to_cart_some_item(db, category_page, browser, config, item=45):
     login_page = LoginPage(browser, config)
     login_page.check_available_users(db)
-    login_page.ensure_logout()
 
     selected_user = random.choice(db.get_users_list())
     login_page.login(selected_user.username, "test123")

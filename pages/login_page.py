@@ -39,6 +39,7 @@ class LoginPage(BasePage):
             new_user = User(firstname=firstname, lastname=lastname, phone=phone, username=username, password='test123')
             self.sign_up(new_user)
             self.logout()
+        self.ensure_logout()
 
     # def login_random_user(self, db):
     #     if self.is_logged_in():
