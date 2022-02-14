@@ -14,7 +14,7 @@ def login_page(browser, config):
 
 
 def test_edit_users_lastname(login_page, db, browser, config):
-    check_available_parameters(login_page, db, browser, config)
+    login_page.check_available_users(db)
     old_users = db.get_users_list()
     selected_user = random.choice(old_users)
     index = old_users.index(selected_user)
@@ -30,7 +30,7 @@ def test_edit_users_lastname(login_page, db, browser, config):
 
 
 def test_edit_users_firstname(login_page, db, browser, config):
-    check_available_parameters(login_page, db, browser, config)
+    login_page.check_available_users(db)
     old_users = db.get_users_list()
     selected_user = random.choice(old_users)
 
@@ -45,7 +45,7 @@ def test_edit_users_firstname(login_page, db, browser, config):
 
 
 def test_edit_users_phone_number(login_page, db, browser, config):
-    check_available_parameters(login_page, db, browser, config)
+    login_page.check_available_users(db)
     old_users = db.get_users_list()
     selected_user = random.choice(old_users)
     index = old_users.index(selected_user)
@@ -60,7 +60,7 @@ def test_edit_users_phone_number(login_page, db, browser, config):
 
 
 def test_edit_users_username_account(login_page, db, browser, config):
-    check_available_parameters(login_page, db, browser, config)
+    login_page.check_available_users(db)
     old_users = db.get_users_list()
     selected_user = random.choice(old_users)
 
@@ -75,15 +75,3 @@ def test_edit_users_username_account(login_page, db, browser, config):
     assert old_users == new_users
 
 
-
-
-def check_available_parameters(login_page, db, browser, config):
-    if db.get_users_list() == []:
-
-        firstname = generator.users.random_string("xx", 6)
-        lastname = generator.users.random_string("yy", 4)
-        phone = generator.users.random_digits_phone(3)
-        username = generator.users.random_char_email(6)
-        new_user = User(firstname=firstname, lastname=lastname, phone=phone, username=username, password='test123')
-        login_page.sign_up(new_user)
-        login_page.logout()

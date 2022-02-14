@@ -13,11 +13,12 @@ class ItemPage(BasePage):
         if not item_id == None:
             item = self.select_item(item_id)
             item.find_element(*MainPageLocators.ADD_TO_CART_FROM_OPTIONS).click() ## add to cart item from item's group
+            # return int(item_id)
         else:
             self.browser.find_element(*ItemPageLocators.ADD_TO_CART_FROM_ITEM_PAGE).click() ## add to cart item from single item's page
         time.sleep(2)  # it's needed because of cart_total takes time to be changed
 
-        return int(item_id)
+
 
 
 
@@ -31,11 +32,11 @@ class ItemPage(BasePage):
         user = None
 
         for i in old_cart:
-            if used_cart == i:  # item added into exist user's cart
+            if used_cart.customer == i.customer and used_cart.product == i.product:  # item added into exist user's cart
                 user = i
                 user.qty += 1
 
-            else:  # item added into not exist user's cart
+            else:  # item added into not existing user's cart
                 continue
 
         if user is None:
@@ -43,7 +44,7 @@ class ItemPage(BasePage):
             return [used_cart.qty, new_cart[-1].qty]
         else:
             for x in new_cart:
-                if used_cart == x:
+                if used_cart.customer == x.customer and used_cart.product == x.product:
                     user2 = x
                     return [user.qty, user2.qty]
 

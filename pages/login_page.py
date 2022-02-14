@@ -1,8 +1,10 @@
+import random
 import time
 
 from .base_page import BasePage
 from .locators import LoginPageLocators, BasePageLocators
 from model.users import User
+import generator.users
 
 class LoginPage(BasePage):
 
@@ -28,10 +30,26 @@ class LoginPage(BasePage):
         self.logout()
 
 
+    def check_available_users(self, db):
+        if db.get_users_list() == []:
+            firstname = generator.users.random_string("xx", 6)
+            lastname = generator.users.random_string("yy", 4)
+            phone = generator.users.random_digits_phone(3)
+            username = generator.users.random_char_email(6)
+            new_user = User(firstname=firstname, lastname=lastname, phone=phone, username=username, password='test123')
+            self.sign_up(new_user)
+            self.logout()
 
-
-
-    ### auxiliary parts of the code***
+    # def login_random_user(self, db):
+    #     if self.is_logged_in():
+    #         self.logout()
+    #     old_users = db.get_users_list()
+    #     selected_user = random.choice(old_users)
+    #     self.login(selected_user.username, "test123")
+    #     return selected_user
+    #
+    #
+    # ### auxiliary parts of the code***
 
 
 

@@ -1,15 +1,14 @@
+import time
 
 import pytest
 from pages.login_page import LoginPage
 from pages.category_page import CategoryPage
 from pages.item_page import ItemPage
-import generator.users
-from model.users import User
 from model.cart import Cart
 import random
 
 
-@pytest.fixture()
+@pytest.fixture
 def category_page(browser, config):
     page = CategoryPage(browser, config)
     url = page.base_url
@@ -18,12 +17,12 @@ def category_page(browser, config):
 
 
 
-
-
-@pytest.mark.parametrize('item', [num for num in range(43, 47)])
+@pytest.mark.parametrize('item', [num for num in range(43, 44)])
 def test_random_user_can_add_to_cart_random_item_from_category_page(db, category_page, browser, config, item):
-    check_available_parameters(category_page, db)
-    login_random_user(db, browser, config)
+    login_page = LoginPage(browser, config)
+    login_page.check_available_users(db)
+    selected_user = random.choice(db.get_users_list())
+    login_page.login(selected_user.username, "test123")
     category_page.open_laptops_page()
     page = ItemPage(browser, category_page.config)
     page.add_to_cart(item)
@@ -32,10 +31,13 @@ def test_random_user_can_add_to_cart_random_item_from_category_page(db, category
 
 
 
-@pytest.mark.parametrize('item', [num for num in range(43, 48)])
+@pytest.mark.parametrize('item', [num for num in range(43, 44)])
 def test_random_user_can_add_to_cart_random_item_from_opened_single_item_page(db, category_page, browser, config, item):
-    check_available_parameters(category_page, db)
-    login_random_user(db, browser, config)
+    login_page = LoginPage(browser, config)
+    login_page.check_available_users(db)
+    login_page.ensure_logout()
+    selected_user = random.choice(db.get_users_list())
+    login_page.login(selected_user.username, "test123")
     category_page.open_laptops_page()
     page = ItemPage(browser, category_page.config)
     page.open_item_info_page(item)
@@ -47,14 +49,18 @@ def test_random_user_can_add_to_cart_random_item_from_opened_single_item_page(db
 
 
 def test_check_cart_after_user_added_to_cart_some_item(db, category_page, browser, config, item=45):
-    check_available_parameters(category_page, db)
-    user = login_random_user(db, browser, config)
+    login_page = LoginPage(browser, config)
+    login_page.check_available_users(db)
+    login_page.ensure_logout()
+
+    selected_user = random.choice(db.get_users_list())
+    login_page.login(selected_user.username, "test123")
     old_cart = db.get_items_in_cart_list()
     category_page.open_laptops_page()
     page = ItemPage(browser, category_page.config)
-    product_id = page.add_to_cart(item)
+    page.add_to_cart(item)
     new_cart = db.get_items_in_cart_list()
-    used_cart = Cart(customer=int(user.id), product=product_id, qty=1)
+    used_cart = Cart(customer=int(selected_user.id), product=item, qty=1)
     quantity = page.get_qty(used_cart, old_cart, new_cart)
 
     assert old_cart == new_cart
@@ -75,24 +81,15 @@ def test_check_cart_after_user_added_to_cart_some_item(db, category_page, browse
 
 
 
-def login_random_user(db, browser, config):
-    page = LoginPage(browser, config)
-    if not page.is_logged_in():
-        old_users = db.get_users_list()
-        selected_user = random.choice(old_users)
-        page.login(selected_user.username, "test123")
-        return selected_user
-    return
+# def login_random_user(db, browser, config):
+#     page = LoginPage(browser, config)
+#     if page.is_logged_in():
+#         page.logout()
+#     old_users = db.get_users_list()
+#     selected_user = random.choice(old_users)
+#     page.login(selected_user.username, "test123")
+#     return selected_user
 
 
 
-def check_available_parameters(login_page, db):
-    if db.get_users_list() == []:
 
-        firstname = generator.users.random_string("xx", 6)
-        lastname = generator.users.random_string("yy", 4)
-        phone = generator.users.random_digits_phone(3)
-        username = generator.users.random_char_email(6)
-        new_user = User(firstname=firstname, lastname=lastname, phone=phone, username=username, password='test123')
-        login_page.sign_up(new_user)
-        login_page.logout()
