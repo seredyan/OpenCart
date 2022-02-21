@@ -121,6 +121,12 @@ class LoginPage(BasePage):
     def should_be_success_message(self):
         return self.is_element_present(*BasePageLocators.SUCCESS_MESSAGE)
 
+    def should_be_alert_wrong_or_missing_fields(self):
+        return self.is_element_present(*LoginPageLocators.WRONG_OR_MISSING_FIELD_ALERT)
+
+
+
+
 
 
 

@@ -57,6 +57,9 @@ class LoginPageLocators:
     REGISTER_CONFIRM_PASSWORD = (By.CSS_SELECTOR, "#input-confirm")
     # EDIT_ACCOUNT = (By.CSS_SELECTOR, "a.list-group-item:nth-child(2)")
     EDIT_ACCOUNT = (By.LINK_TEXT, "Edit Account")
+    # ALERT_MESSAGE = (By.CSS_SELECTOR, ".alert.alert-danger.alert-dismissible")
+    WRONG_OR_MISSING_FIELD_ALERT = (By.CSS_SELECTOR, "div.col-sm-10 .text-danger")
+
 
 
 class MainPageLocators:
