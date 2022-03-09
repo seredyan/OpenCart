@@ -17,4 +17,4 @@ def category_page(browser, config):
 def test_add_item_to_wishlist_from_category_page(category_page, browser, config, item=43):
     page = ItemPage(browser, category_page.config)
     page.add_to_wish_list(item)
-    assert page.should_be_warning_message()
+    assert page.should_be_wishlist_warning_message(), "There is no warning message about the wishlist"

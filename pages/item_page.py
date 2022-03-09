@@ -120,8 +120,9 @@ class ItemPage(BasePage):
         return item.find_element(*ItemPageLocators.APPENDED_PART_ITEM_PRICE).text
 
 
-    def should_be_warning_message(self):
-        return self.is_element_present(*BasePageLocators.ALERT_MESSAGE), "There is no warning message about the wishlist"
+    def should_be_wishlist_warning_message(self):
+        message = self.browser.find_element(*BasePageLocators.ALERT_MESSAGE).text
+        return "You must login or create an account to save" in message
 
 
 
