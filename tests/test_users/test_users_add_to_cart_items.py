@@ -14,6 +14,7 @@ def user_login(db, browser, config, category_page):
     login_page.check_available_users(db)
     selected_user = random.choice(db.get_users_list())
     login_page.login(selected_user.username, "test123")
+    login_page.ensure_login(selected_user.username, "test123")
     return selected_user
 
 

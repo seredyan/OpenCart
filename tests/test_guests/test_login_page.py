@@ -2,9 +2,7 @@ import os
 import random
 
 import pytest
-import conftest
 from pages.login_page import LoginPage
-import generator.users
 from model.users import User
 
 

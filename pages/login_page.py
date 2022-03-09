@@ -99,6 +99,14 @@ class LoginPage(BasePage):
         return len(self.browser.find_elements(*LoginPageLocators.LOGOUT)) > 0
 
 
+    def ensure_login(self, username, password):
+        if self.is_logged_in():
+            return
+        else:
+            self.logout()
+        self.login(username, password)
+
+
     def fill_sign_up_forms(self, user):
         self.change_field_value(*LoginPageLocators.REGISTER_FIRST_NAME, user.firstname)
         self.change_field_value(*LoginPageLocators.REGISTER_LAST_NAME, user.lastname)
