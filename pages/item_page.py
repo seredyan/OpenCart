@@ -19,6 +19,13 @@ class ItemPage(BasePage):
         time.sleep(2)  # it's needed because of cart_total takes time to be changed
 
 
+    def add_to_wish_list(self, item_id=None):
+        if not item_id == None:
+            item = self.select_item(item_id)
+            item.find_element(*MainPageLocators.ADD_TO_WISH_LIST_ON_PLATE).click()  ## add to wishlist item from item's group
+        else:
+            self.browser.find_element(*ItemPageLocators.ADD_TO_WISH_LIST).click() ## add to wishlist item from single item's page
+        time.sleep(1)
 
 
 
@@ -73,7 +80,7 @@ class ItemPage(BasePage):
 
 
     def should_be_success_added_to_cart_message(self, item_id=None):
-        message = self.browser.find_element(*BasePageLocators.SUCCESS_MESSAGE).text
+        message = self.browser.find_element(*BasePageLocators.ALERT_MESSAGE).text
         product_name = self.get_item_name(item_id)
         return "Success" and product_name and "shopping cart" in message
 
@@ -101,16 +108,20 @@ class ItemPage(BasePage):
 
     def get_item_price_from_plate(self, item_id=None):
         """provides clear price"""
-        info_price = self.ccollect_all_info_price_from_plate(item_id)
+        info_price = self.collect_all_info_price_from_plate(item_id)
         get_total = re.search("\d+\,*?\d+\.*?\d+", info_price).group(0)
         total = float(get_total.replace(',', ''))
         return total
 
 
-    def ccollect_all_info_price_from_plate(self, item_id=None):
+    def collect_all_info_price_from_plate(self, item_id=None):
         """reads info about full price (include Tax) from the item's plate on the category_page"""
         item = self.select_item(item_id)
         return item.find_element(*ItemPageLocators.APPENDED_PART_ITEM_PRICE).text
+
+
+    def should_be_warning_message(self):
+        return self.is_element_present(*BasePageLocators.ALERT_MESSAGE), "There is no warning message about the wishlist"
 
 
 

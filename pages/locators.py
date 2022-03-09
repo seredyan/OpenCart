@@ -3,10 +3,11 @@ from selenium.webdriver.common.by import By
 
 
 class BasePageLocators:
+    ALERT_MESSAGE = (By.CSS_SELECTOR, "div.alert.alert-success.alert-dismissible")
     LOGIN_LINK = (By.CSS_SELECTOR, " .dropdown .caret")
     LOGIN_LINK_INVALID = (By.CSS_SELECTOR, " .dropdown .caret_inv")  ## for test NoSuchElementException
     DISPLAYED_BASKET = (By.ID, "cart-total")
-    SUCCESS_MESSAGE = (By.CSS_SELECTOR, "div.alert-success")
+    # ALERT_MESSAGE = (By.CSS_SELECTOR, "div.alert-success")
 
 
 class CartPageLocators:
@@ -29,6 +30,7 @@ class CategoryPageLocators:
 class ItemPageLocators:
 
     ADD_TO_CART_FROM_ITEM_PAGE = (By.CSS_SELECTOR, "#button-cart")
+    ADD_TO_WISH_LIST = (By.CSS_SELECTOR, ".btn.btn-default i.fa-heart")
     APPENDED_PART_TO_ITEM_PAGE = (By.CSS_SELECTOR, "h4 a")
     APPENDED_PART_ITEM_PRICE = (By.CSS_SELECTOR, ".price")
     ITEM_PLATES = (By.CSS_SELECTOR, "div.product-thumb")
@@ -36,6 +38,7 @@ class ItemPageLocators:
     MAC_DESKTOP = (By.PARTIAL_LINK_TEXT, 'Mac')
     ITEM_PRICE_ON_ITEM_PAGE = (By.CSS_SELECTOR, "#content div.col-sm-4 h2")
     INPUT_QUANTITY = (By.CSS_SELECTOR, "#input-quantity")
+
 
 
 
@@ -64,6 +67,7 @@ class LoginPageLocators:
 
 class MainPageLocators:
     ADD_TO_CART_FROM_OPTIONS = (By.CSS_SELECTOR, "button[onclick^='cart.add']")
+    ADD_TO_WISH_LIST_ON_PLATE = (By.CSS_SELECTOR, ".button-group i.fa-heart")
     BUTTON_CART_TOTAL = (By.CSS_SELECTOR, "#cart-total")
 
 
