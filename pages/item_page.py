@@ -122,7 +122,7 @@ class ItemPage(BasePage):
 
     def should_be_wishlist_warning_message(self):
         message = self.browser.find_element(*BasePageLocators.ALERT_MESSAGE).text
-        return "You must login or create an account to save" in message
+        return "You must" and "login" and "create an account" in message
 
 
 
