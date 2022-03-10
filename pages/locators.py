@@ -8,6 +8,8 @@ class BasePageLocators:
     LOGIN_LINK_INVALID = (By.CSS_SELECTOR, " .dropdown .caret_inv")  ## for test NoSuchElementException
     DISPLAYED_BASKET = (By.ID, "cart-total")
     # ALERT_MESSAGE = (By.CSS_SELECTOR, "div.alert-success")
+    GO_TO_LOGIN_FROM_ALERT_MESSAGE = (By.CSS_SELECTOR, ".alert > a:nth-child(2)")
+    GO_TO_REGISTRATION_FROM_ALERT_MESSAGE = (By.CSS_SELECTOR, ".alert > a:nth-child(3)")
 
 
 class CartPageLocators:

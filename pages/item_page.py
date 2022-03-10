@@ -86,7 +86,7 @@ class ItemPage(BasePage):
 
 
     def get_item_name(self, item_id=None):
-        if "category" in self.browser.current_url or self.browser.current_url.endswith("/home"):
+        if "category" in self.browser.current_url or self.browser.current_url.endswith("/home") or self.browser.current_url.endswith("/opencart/"):
             item = self.select_item(item_id)
             return item.find_element(*ItemPageLocators.APPENDED_PART_TO_ITEM_PAGE).text
         else:
@@ -99,6 +99,16 @@ class ItemPage(BasePage):
         info_price = self.browser.find_element(*ItemPageLocators.ITEM_PRICE_ON_ITEM_PAGE).text
         total = self.manage_price_text(info_price)
         return Cart(qty=qty, price=total*qty)
+
+    def go_to_login_from_alert_message(self):
+        self.browser.find_element(*BasePageLocators.GO_TO_LOGIN_FROM_ALERT_MESSAGE).click()
+        return self.browser.current_url.endswith("/login")
+
+    def go_to_registration_from_alert_message(self):
+        self.browser.find_element(*BasePageLocators.GO_TO_REGISTRATION_FROM_ALERT_MESSAGE).click()
+        return self.browser.current_url.endswith("/register")
+
+
 
 
     def input_quantity(self, qty):
@@ -120,9 +130,10 @@ class ItemPage(BasePage):
         return item.find_element(*ItemPageLocators.APPENDED_PART_ITEM_PRICE).text
 
 
-    def should_be_wishlist_warning_message(self):
+    def should_be_wishlist_warning_message(self, item_id):
         message = self.browser.find_element(*BasePageLocators.ALERT_MESSAGE).text
-        return "You must" and "login" and "create an account" in message
+        product_name = self.get_item_name(item_id)
+        return "You must" and "login" and "create an account" and product_name in message
 
 
 
