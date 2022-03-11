@@ -23,7 +23,9 @@ def test_add_some_laptop_to_cart_from_category_page(category_page, browser, conf
     category_page.open_laptops_page()
     page = ItemPage(browser, category_page.config)
     page.add_to_cart(item)
-    assert page.should_be_success_added_to_cart_message(item), "No/not_correct message about added item"
+    selected_item = page.get_item_name(item)
+    assert page.should_be_alert_message() == f"Success: You have added {selected_item} to your shopping cart!\n×", \
+        "No/not_correct message about added item"
 
 
 ## TEMPORARY TEST: test will be failed when the bug got fixed
@@ -32,7 +34,9 @@ def test_add_item47_to_cart_from_category_page_temporary_test(category_page, bro
     category_page.open_laptops_page()
     page = ItemPage(browser, category_page.config)
     page.add_to_cart(item)
-    assert page.should_be_success_added_to_cart_message(item), "No/not_correct message about added item"
+    selected_item = page.get_item_name(item)
+    assert page.should_be_alert_message() == f"Success: You have added {selected_item} to your shopping cart!\n×", \
+        "No/not_correct message about added item"
 
 
 
@@ -43,7 +47,9 @@ def test_add_to_cart_from_opened_single_item_page(category_page, browser, config
     page = ItemPage(browser, category_page.config)
     page.open_item_info_page(item)
     page.add_to_cart()
-    assert page.should_be_success_added_to_cart_message(), "No/not_correct message about added item"
+    selected_item = page.get_item_name(item)
+    assert page.should_be_alert_message() == f"Success: You have added {selected_item} to your shopping cart!\n×", \
+        "No/not_correct message about added item"
 
 
 def test_add_random_item_to_cart_from_its_page(category_page, browser, config, item=random.randrange(43, 48)):
@@ -51,7 +57,9 @@ def test_add_random_item_to_cart_from_its_page(category_page, browser, config, i
     page = ItemPage(browser, category_page.config)
     page.open_item_info_page(item)
     page.add_to_cart()
-    assert page.should_be_success_added_to_cart_message(), "No/not_correct message about added item"
+    selected_item = page.get_item_name(item)
+    assert page.should_be_alert_message() == f"Success: You have added {selected_item} to your shopping cart!\n×", \
+        "No/not_correct message about added item"
 
 
 
@@ -109,7 +117,8 @@ def test_check_all_asserts_adding_item_to_cart(category_page, browser, config, i
     items_total = page.get_total_item_price_and_quantity_from_item_page(quantity)
     old_cart_total.qty = old_cart_total.qty + items_total.qty
     old_cart_total.price = old_cart_total.price + items_total.price
+    selected_item = page.get_item_name(item)
 
     ### using pytest-check as check for multiple assertion
-    check.is_true(page.should_be_success_added_to_cart_message(), "No/not_correct message about added item")
+    # check.is_true(page.should_be_alert_message() == f"Success: You have added {selected_item} to your shopping cart! ", "No/not_correct message about added item")
     check.equal(new_cart_total, old_cart_total)

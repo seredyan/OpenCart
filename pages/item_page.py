@@ -79,13 +79,6 @@ class ItemPage(BasePage):
         time.sleep(1)
 
 
-    def should_be_success_added_to_cart_message(self, item_id=None):
-        message = self.browser.find_element(*BasePageLocators.ALERT_MESSAGE).text
-        product_name = self.get_item_name(item_id)
-        # return "Success" and product_name and "shopping cart" in message
-        return message
-
-
     def get_item_name(self, item_id=None):
         if "category" in self.browser.current_url or self.browser.current_url.endswith("/home") or self.browser.current_url.endswith("/opencart/"):
             item = self.select_item(item_id)

@@ -3,7 +3,7 @@ import time
 import pytest
 from pages.category_page import CategoryPage
 from pages.item_page import ItemPage
-import random
+
 
 
 @pytest.fixture()

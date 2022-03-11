@@ -32,7 +32,9 @@ def test_random_user_can_add_to_cart_random_item_from_category_page(db, user_log
     category_page.open_laptops_page()
     page = ItemPage(browser, category_page.config)
     page.add_to_cart(item)
-    assert page.should_be_success_added_to_cart_message(item), "No/not_correct message about added item"
+    selected_item = page.get_item_name(item)
+    assert page.should_be_alert_message() == f"Success: You have added {selected_item} to your shopping cart!\n×", \
+        "No/not_correct message about added item"
 
 
 
@@ -43,7 +45,9 @@ def test_random_user_can_add_to_cart_random_item_from_opened_single_item_page(db
     page = ItemPage(browser, category_page.config)
     page.open_item_info_page(item)
     page.add_to_cart()
-    assert page.should_be_success_added_to_cart_message(), "No/not_correct message about added item"
+    selected_item = page.get_item_name(item)
+    assert page.should_be_alert_message() == f"Success: You have added {selected_item} to your shopping cart!\n×", \
+        "No/not_correct message about added item"
 
 
 
