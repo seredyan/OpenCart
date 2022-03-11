@@ -82,7 +82,8 @@ class ItemPage(BasePage):
     def should_be_success_added_to_cart_message(self, item_id=None):
         message = self.browser.find_element(*BasePageLocators.ALERT_MESSAGE).text
         product_name = self.get_item_name(item_id)
-        return "Success" and product_name and "shopping cart" in message
+        # return "Success" and product_name and "shopping cart" in message
+        return message
 
 
     def get_item_name(self, item_id=None):
@@ -130,10 +131,8 @@ class ItemPage(BasePage):
         return item.find_element(*ItemPageLocators.APPENDED_PART_ITEM_PRICE).text
 
 
-    def should_be_wishlist_warning_message(self, item_id):
+    def should_be_alert_message(self):
         message = self.browser.find_element(*BasePageLocators.ALERT_MESSAGE).text
-        product_name = self.get_item_name(item_id)
-        return "You must" and "login" and "create an account" and product_name in message
-
+        return message
 
 
