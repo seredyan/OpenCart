@@ -50,6 +50,21 @@ class DbFixture:
         return items_list
 
 
+    def get_items_in_wish_list(self):
+
+        items_list = []
+
+        cursor = self.connection.cursor()
+        try:
+            cursor.execute("select customer_id, product_id from oc_customer_wishlist")
+            for row in cursor:
+                (customer, product) = row
+                items_list.append(Cart(customer=customer, product=product))
+        finally:
+            cursor.close()
+        return items_list
+
+
 
 
     def destroy(self):

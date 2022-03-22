@@ -25,6 +25,10 @@ def category_page(browser, config):
     page.open(url)
     return page
 
+@pytest.fixture(scope="function")
+def items_in_cart(db):
+    cart = db.get_items_in_cart_list()
+    return cart
 
 
 @pytest.mark.parametrize('item', [num for num in range(43, 47)])
@@ -53,17 +57,19 @@ def test_random_user_can_add_to_cart_random_item_from_opened_single_item_page(db
 
 
 
-def test_check_cart_after_user_added_to_cart_some_item(db, user_login, category_page, browser, config, item=45):
-    old_cart = db.get_items_in_cart_list()
+def test_check_cart_after_user_added_to_cart_some_item(db, items_in_cart, user_login, category_page, browser, config, item=45):
+
     category_page.open_laptops_page()
     page = ItemPage(browser, category_page.config)
     page.add_to_cart(item)
     new_cart = db.get_items_in_cart_list()
     used_cart = Cart(customer=int(user_login.id), product=item, qty=1)
-    quantity = page.get_qty(used_cart, old_cart, new_cart)
+    quantity = page.get_qty(used_cart, items_in_cart, new_cart)
 
-    assert old_cart == new_cart
+    assert items_in_cart == new_cart
     assert quantity[0] == quantity[1]
+
+
 
 
 
