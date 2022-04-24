@@ -1,3 +1,4 @@
+from operator import attrgetter
 
 from model.cart import Cart
 import pytest
@@ -41,8 +42,8 @@ def test_user_adds_item_to_wishlist_from_category_page(db, old_wish_list, catego
     old_wish_list.append(used_wish_list)
     new_wish_list = db.get_items_in_wish_list()
 
-    assert old_wish_list == new_wish_list
+    assert sorted(old_wish_list, key=attrgetter('customer', 'product')) == new_wish_list
     print("old: ", old_wish_list)
     print("new: ", new_wish_list)
-    # assert page.should_be_alert_message() == f"Success: You have added {selected_item} to your wish list!\n×", \
-    #     "There is no warning message or wrong message about the wishlist"
+    assert page.should_be_alert_message() == f"Success: You have added {selected_item} to your wish list!\n×", \
+        "There is no warning message or wrong message about the wishlist"

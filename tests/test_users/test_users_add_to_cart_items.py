@@ -69,6 +69,8 @@ def test_check_cart_after_user_added_to_cart_some_item(db, items_in_cart, user_l
     assert items_in_cart == new_cart
     assert quantity[0] == quantity[1]
 
+    print(" old: ", items_in_cart)
+    print(" new: ", new_cart)
 
 
 

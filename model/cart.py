@@ -21,8 +21,5 @@ class Cart:
         return self.customer == other.customer and self.product == other.product and self.qty == other.qty and self.price == other.price
 
 
-    # def id_or_max(self):
-    #     if self.id:
-    #         return int(self.id)
-    #     else:
-    #         return maxsize
+    def sort_by_id(self):
+        return self.customer and self.product

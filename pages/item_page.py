@@ -39,7 +39,7 @@ class ItemPage(BasePage):
         user = None
 
         for i in old_cart:
-            if used_cart.customer == i.customer and used_cart.product == i.product:  # item added into exist user's cart
+            if used_cart.customer == i.customer and used_cart.product == i.product:  # item added into existing user's cart
                 user = i
                 user.qty += 1
 
