@@ -1,6 +1,9 @@
 .idea
 .pytest_cashe
 __pycashe__/
+geckodriver.log
+mock_code
+
 
 ### Linux ###
 *~
@@ -73,3 +76,6 @@ $RECYCLE.BIN/
 *.lnk
 
 # End of https://www.toptal.com/developers/gitignore/api/windows,macos,linux
+/tests/test_guests/test_mock2.py
+/tests/test_guests/test_mock3.py
+/tests/test_guests/test_mock_some_tests.py

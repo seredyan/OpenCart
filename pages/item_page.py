@@ -128,4 +128,9 @@ class ItemPage(BasePage):
         message = self.browser.find_element(*BasePageLocators.ALERT_MESSAGE).text
         return message
 
+    def get_page_title(self):
+        get_title = self.browser.title
+        return get_title
+
+
 
