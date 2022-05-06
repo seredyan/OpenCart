@@ -1,6 +1,6 @@
 from sys import maxsize
 
-class Desktop:
+class Product:
     def __init__(self, id=None, name=None, qty=None):
         self.id = id
         self.name = name

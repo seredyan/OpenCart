@@ -15,6 +15,7 @@ class BasePageLocators:
 class CartPageLocators:
     CART_LINK = (By.LINK_TEXT, "Shopping Cart")
     CART_CHECKOUT = (By.CSS_SELECTOR, "a.btn-primary")  ## ?????
+    ITEM_NAME = (By.CSS_SELECTOR, "td.text-left a")
 
 
 
