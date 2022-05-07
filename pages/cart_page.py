@@ -16,14 +16,12 @@ class CartPage(BasePage):
 
     def get_item_name_in_cart(self):
 
-        self.item_cashe = []
-        row = self.browser.find_element(*CartPageLocators.ITEM_NAME).text
-
-        # id = int((row.get_attribute('href')).split("id=", 1)[1])
-
-        # name = row.text
-        return row
-            # self.item_cashe.append(Product(id=id, name=name))
+        item_cashe = []
+        row = self.browser.find_element(*CartPageLocators.ITEM_NAME)
+        id = int((row.get_attribute('href')).split("id=", 1)[1])
+        name = row.text
+        item = Product(id=id, name=name)
+        return item
 
 
 

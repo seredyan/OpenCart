@@ -1,6 +1,7 @@
 
 import pytest
 
+from model.product import Product
 from pages.category_page import CategoryPage
 from pages.item_page import ItemPage
 from pages.cart_page import CartPage
@@ -20,7 +21,8 @@ def test_cart_page_after_adding_item(browser, config, category_page, item=40):
     selected_item = page.get_item_name(item)
     cart_page = CartPage(browser, config)
     cart_page.open_cart_page()
-    a = cart_page.get_item_name_in_cart()
+    added_item = Product(name=selected_item, id=item)
+    item_in_cart = cart_page.get_item_name_in_cart()
 
-    print(a)
+    assert added_item == item_in_cart
 
