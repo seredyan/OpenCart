@@ -14,13 +14,13 @@ class CartPage(BasePage):
         self.browser.find_element(*CartPageLocators.CART_LINK).click()
 
 
-    def get_item_name_in_cart(self):
+    def get_item_info_in_cart(self):
 
-        item_cashe = []
         row = self.browser.find_element(*CartPageLocators.ITEM_NAME)
         id = int((row.get_attribute('href')).split("id=", 1)[1])
         name = row.text
-        item = Product(id=id, name=name)
+        qty = self.browser.find_element(*CartPageLocators.ITEM_QTY)
+        item = Product(id=id, name=name, qty=qty)
         return item
 
 
