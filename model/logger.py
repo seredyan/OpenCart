@@ -7,7 +7,7 @@ from idlelib import browser
 class Logger():
     # new_logs = f"logs/log_" + str(datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")) + ".log"
     new_logs = f"log_{str(datetime.datetime.now())}.log"
-    file_name = os.path.join(os.path.dirname(os.path.abspath(__file__)), "../logs/", new_logs)
+    file_name = os.path.join(os.path.dirname(os.path.abspath(__file__)), "../logs1/", new_logs)
 
     @classmethod
     def _write_log_to_file(cls, data: str):
