@@ -5,6 +5,8 @@ from selenium.common.exceptions import NoSuchElementException, TimeoutException,
 import re
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+
+from model.logger import Logger
 from pages.locators import BasePageLocators
 
 
@@ -17,6 +19,7 @@ class BasePage:
         self.config = config
         self.base_url = config['web']['baseUrl']
         browser.implicitly_wait(timeout)
+        Logger.add_log(browser)
 
 
 
@@ -75,6 +78,7 @@ class BasePage:
     def open(self, url):
         wd = self.browser
         wd.get(url)
+
 
 
     def should_be_login_link(self):

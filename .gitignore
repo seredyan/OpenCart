@@ -3,6 +3,7 @@
 __pycashe__/
 geckodriver.log
 mock_code
+logs/*
 
 
 ### Linux ###
@@ -79,3 +80,4 @@ $RECYCLE.BIN/
 /tests/test_guests/test_mock2.py
 /tests/test_guests/test_mock3.py
 /tests/test_guests/test_mock_some_tests.py
+/logs/
