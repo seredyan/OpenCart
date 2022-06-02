@@ -1,4 +1,5 @@
-selenium==3.14.0
-pytest==4.6.0
-ipython==7.7.0
+selenium==3.9
+pytest==7.1.2
+ipython
 mysql-connector-python-rf
+

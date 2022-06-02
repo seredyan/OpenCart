@@ -19,7 +19,7 @@ class BasePage:
         self.config = config
         self.base_url = config['web']['baseUrl']
         browser.implicitly_wait(timeout)
-        Logger.add_log(browser)
+        Logger.start_log(browser)
 
 
 

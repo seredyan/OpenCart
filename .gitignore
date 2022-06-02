@@ -4,6 +4,7 @@ __pycashe__/
 geckodriver.log
 mock_code
 logs1/*
+reports/*
 
 
 ### Linux ###

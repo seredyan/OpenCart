@@ -15,7 +15,7 @@ class Logger():
             logger_file.write(data)
 
     @classmethod
-    def add_log(cls, browser):#, url: str):
+    def start_log(cls, browser):#, url: str):
         testname = os.environ.get('PYTEST_CURRENT_TEST')
 
         data_to_add = f"\n-----\n"
@@ -25,3 +25,9 @@ class Logger():
         data_to_add += "\n"
 
         cls._write_log_to_file(data_to_add)
+
+    @classmethod
+    def finish_log(cls, browser):   # here could be collected last data on the end of each test
+        # data_to_add =
+        # cls._write_log_to_file(data_to_add)
+        pass

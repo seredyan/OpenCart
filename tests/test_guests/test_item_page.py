@@ -77,6 +77,7 @@ def test_check_cart_total_adding_item_to_cart_from_category_page(category_page, 
     assert new_cart_total == old_cart_total
 
 
+
 def test_check_cart_total_adding_item_to_cart_from_its_page(category_page, browser, config, item=random.randrange(43, 48)):
     category_page.open_laptops_page()
     page = ItemPage(browser, category_page.config)

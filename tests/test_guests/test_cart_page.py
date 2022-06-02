@@ -26,3 +26,6 @@ def test_cart_page_after_adding_single_item(browser, config, category_page, item
 
     assert added_item == item_in_cart
 
+def test111(browser, config, category_page):
+    page = ItemPage(browser, config)
+    return page
