@@ -10,6 +10,8 @@ from selenium.webdriver.chrome.options import Options
 import pymysql.cursors
 
 target = None
+fixture = None
+
 
 def load_config(file):
     global target
@@ -26,13 +28,20 @@ def load_config(file):
 def config(request):
     return load_config(request.config.getoption("--target"))
 
-
-
-
-@pytest.fixture(scope="session")
+@pytest.fixture
 def browser(request):
+    global fixture
     browser_param = request.config.getoption("--browser")
     headless = request.config.getoption("--headless")
+    if fixture is None or not is_valid():
+        fixture = start_browser(browser_param, headless)
+    else:
+        fixture = driver
+    return fixture
+
+
+def start_browser(browser_param, headless):
+    global driver
     if browser_param == "chrome":
         options = Options()
         if headless: options.headless = True
@@ -46,11 +55,9 @@ def browser(request):
     elif browser_param == "edge":
         driver = webdriver.Edge()
     else:
-        raise Exception(f"{request.param} is not supported!")
+        raise ValueError("Unrecognized browser %s" % browser)
 
     driver.implicitly_wait(10)
-    request.addfinalizer(driver.close)
-    # driver.get(request.config.getoption("--url"))
     return driver
 
 
@@ -96,5 +103,20 @@ def load_from_json(file):
 
 
 
+def destroy():
+    driver.quit()
 
+
+def is_valid():
+    try:
+        driver.current_url
+        return True
+    except:
+        return False
+
+@pytest.fixture(scope="session", autouse=True)
+def stop(request):
+    def fin():
+        destroy()
+    request.addfinalizer(fin)
 
